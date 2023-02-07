@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: wordpress:latest
+        image: wordpress:6.1.1-apache
         ports:
         - containerPort: 80
         env: 
@@ -25,6 +25,17 @@ spec:
           value: wordpress
         - name: WORDPRESS_DB_PASSWORD
           value: wordpress
+        volumeMounts:
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/html
+          subPath: html
+        - name: wordpress-persistent-storage
+          mountPath: /usr/local/etc/php/conf.d/php.ini
+          subPath: php
+      volumes:
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: wp-pv-claim
 ---
 apiVersion: v1
 kind: Service
