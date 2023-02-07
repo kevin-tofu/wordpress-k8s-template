@@ -30,7 +30,7 @@ spec:
           mountPath: /var/www/html
           subPath: html
         - name: wordpress-persistent-storage
-          mountPath: /usr/local/etc/php/conf.d/php.ini
+          mountPath: /usr/local/etc/php
           subPath: php
       volumes:
       - name: wordpress-persistent-storage
