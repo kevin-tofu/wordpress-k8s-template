@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+  namespace: wp
+spec:
+  storageClassName: mysql-pv
+  capacity:
+    storage: 40Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /var/snap/microk8s/common/default-storage/wp-mysql-pvc-c1f923d1-9083-4ffd-92d5-7c88e379916d
+---
