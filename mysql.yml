@@ -1,16 +1,3 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql
-  namespace: myservice
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
-  # hostPath:
-  #   path: "/mnt/data/marianadb"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -33,8 +20,8 @@ spec:
         ports:
         - containerPort: 3036
         volumeMounts:
-          - mountPath: "/var/lib/mysql"
-            name: mysql
+        - mountPath: "/var/lib/mysql"
+          name: mysql-pvc
         env: 
         - name: MYSQL_ROOT_PASSWORD
           value: wordpress
@@ -45,9 +32,9 @@ spec:
         - name: MYSQL_PASSWORD
           value: wordpress
       volumes:
-      - name: mysql
+      - name: mysql-pvc
         persistentVolumeClaim:
-          claimName: mysql
+          claimName: mysql-pvc
 ---
 apiVersion: v1
 kind: Service

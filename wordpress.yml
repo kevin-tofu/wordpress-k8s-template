@@ -28,10 +28,10 @@ spec:
         volumeMounts:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
-          subPath: html
-        - name: wordpress-persistent-storage
-          mountPath: /usr/local/etc/php
-          subPath: php
+        #  subPath: html
+        # - name: wordpress-persistent-storage
+        #  mountPath: /usr/local/etc/php
+        #  subPath: php
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
